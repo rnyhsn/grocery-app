@@ -1,7 +1,12 @@
 'use server';
 
+export interface IAction {
+    success: any,
+    message?: string,
+    payload?: any
+  }
 
-export const createUser = async (prev: any, formData: FormData) => {
+export const createUser = async (prev: IAction, formData: FormData) => {
    
     const {username, email, password} = Object.fromEntries(formData);
     try {

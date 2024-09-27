@@ -1,5 +1,5 @@
 'use client';
-import { createUser } from '@/utils/apis/auth';
+import { createUser, IAction } from '@/utils/apis/auth';
 import Link from 'next/link'
 import { redirect, useRouter } from 'next/navigation';
 import { useFormState } from 'react-dom';
@@ -9,15 +9,16 @@ import { toast } from "sonner"
 
 const RegisterPage = () => {
   const router = useRouter();
-  const initialstate = {
+  const initialstate: IAction = {
     success: "",
-    payload: null
+    message: "",
+    payload: ""
   }
   if(sessionStorage.getItem('jwt')) {
     // router.push("/");
     redirect("/");
   }
-  const [state, formAction] = useFormState(createUser, initialstate as any);
+  const [state, formAction] = useFormState(createUser, initialstate);
   console.log(state);
   if(state.success) {
     sessionStorage.setItem('jwt', state.payload.jwt);

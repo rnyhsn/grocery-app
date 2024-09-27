@@ -1,5 +1,5 @@
 "use client";
-import { userLogin } from '@/utils/apis/auth';
+import { IAction, userLogin } from '@/utils/apis/auth';
 import Link from 'next/link'
 import { redirect, useRouter } from 'next/navigation';
 import { useState } from 'react'
@@ -11,16 +11,17 @@ import { toast } from 'sonner';
 const LoginPage = () => {
 
  
-  const initialstate = {
+  const initialstate: IAction = {
     success: "",
-    message: ""
+    message: "",
+    payload: ""
   }
   const router = useRouter();
   if(sessionStorage.getItem("jwt")) {
       // router.push("/");
       redirect("/");
   }
-  const [state, formAction] = useFormState(userLogin, initialstate as any);
+  const [state, formAction] = useFormState(userLogin, initialstate);
   // console.log(state);
   if(state.success) {
     sessionStorage.setItem('jwt', state.payload.jwt);
