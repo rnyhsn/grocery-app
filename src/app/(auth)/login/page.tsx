@@ -6,10 +6,7 @@ import { useState } from 'react'
 import { useFormState } from 'react-dom';
 import { toast } from 'sonner';
 
-interface IAction {
-  success: string|boolean,
-  message?: string
-}
+
 
 const LoginPage = () => {
 
@@ -23,7 +20,7 @@ const LoginPage = () => {
       // router.push("/");
       redirect("/");
   }
-  const [state, formAction] = useFormState(userLogin, initialstate);
+  const [state, formAction] = useFormState(userLogin, initialstate as any);
   // console.log(state);
   if(state.success) {
     sessionStorage.setItem('jwt', state.payload.jwt);

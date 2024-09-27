@@ -17,7 +17,7 @@ const RegisterPage = () => {
     // router.push("/");
     redirect("/");
   }
-  const [state, formAction] = useFormState(createUser, initialstate);
+  const [state, formAction] = useFormState(createUser, initialstate as any);
   console.log(state);
   if(state.success) {
     sessionStorage.setItem('jwt', state.payload.jwt);
